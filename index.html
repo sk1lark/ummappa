@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for umma & appa 🕊️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap');
+
+```
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        font-family: 'Times New Roman', Times, serif;
+        background: #0a0604;
+        color: #fff5e6;
+        overflow-x: hidden;
+        position: relative;
+        perspective: 1000px;
+    }
+    
+    /* Canvas for particles */
+    #particle-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+    }
+    
+    /* Animated gradient background */
+    .bg-gradient {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+            radial-gradient(ellipse at 20% 20%, rgba(255, 120, 40, 0.15) 0%, transparent 50%),
+            radial-gradient(ellipse at 80% 80%, rgba(255, 180, 100, 0.12) 0%, transparent 50%),
+            radial-gradient(ellipse at 50% 50%, rgba(212, 100, 60, 0.1) 0%, transparent 70%);
+        animation: bgShift 20s ease-in-out infinite;
+        z-index: 0;
+    }
+    
+    @keyframes bgShift {
+        0%, 100% { 
+            transform: scale(1) rotate(0deg);
+            opacity: 0.6;
+        }
+        50% { 
+            transform: scale(1.2) rotate(5deg);
+            opacity: 1;
+        }
+    }
+    
+    /* Content wrapper */
+    .content-wrapper {
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Hero Section */
+    .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        padding: 40px 20px;
+    }
+    
+    .hero-title {
+        font-family: 'Cinzel', serif;
+        font-size: 6em;
+        font-weight: 700;
+        color: #ff9944;
+        letter-spacing: 8px;
+        margin-bottom: 30px;
+        position: relative;
+        transform-style: preserve-3d;
+        animation: titleFloat 4s ease-in-out infinite;
+    }
+    
+    @keyframes titleFloat {
+        0%, 100% {
+            transform: translateY(0) rotateX(0deg);
+            text-shadow: 
+                0 0 40px rgba(255, 153, 68, 0.8),
+                0 0 80px rgba(255, 153, 68, 0.5),
+                0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        50% {
+            transform: translateY(-20px) rotateX(5deg);
+            text-shadow: 
+                0 0 60px rgba(255, 153, 68, 1),
+                0 0 120px rgba(255, 153, 68, 0.7),
+                0 20px 50px rgba(0, 0, 0, 0.7);
+        }
+    }
+    
+    .hero-title span {
+        display: inline-block;
+        animation: letterFloat 3s ease-in-out infinite;
+    }
+    
+    .hero-title span:nth-child(1) { animation-delay: 0s; }
+    .hero-title span:nth-child(2) { animation-delay: 0.1s; }
+    .hero-title span:nth-child(3) { animation-delay: 0.2s; }
+    .hero-title span:nth-child(4) { animation-delay: 0.3s; }
+    .hero-title span:nth-child(5) { animation-delay: 0.4s; }
+    .hero-title span:nth-child(6) { animation-delay: 0.5s; }
+    
+    @keyframes letterFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    .hero-subtitle {
+        font-family: 'Libre Baskerville', serif;
+        font-size: 2em;
+        color: #d4aa7a;
+        font-style: italic;
+        letter-spacing: 4px;
+        animation: subtitleGlow 2s ease-in-out infinite;
+    }
+    
+    @keyframes subtitleGlow {
+        0%, 100% { 
+            opacity: 0.7;
+            text-shadow: 0 0 20px rgba(212, 170, 122, 0.5);
+        }
+        50% { 
+            opacity: 1;
+            text-shadow: 0 0 40px rgba(212, 170, 122, 0.8);
+        }
+    }
+    
+    .scroll-indicator {
+        position: absolute;
+        bottom: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 3em;
+        color: #ff9944;
+        animation: bounce 2s ease-in-out infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 100% { transform: translateX(-50%) translateY(0); }
+        50% { transform: translateX(-50%) translateY(20px); }
+    }
+    
+    /* Letter Section */
+    .letter-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 100px 40px;
+        position: relative;
+    }
+    
+    .letter {
+        max-width: 900px;
+        background: rgba(30, 20, 15, 0.8);
+        backdrop-filter: blur(20px);
+        border: 2px solid transparent;
+        border-radius: 20px;
+        padding: 70px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.3s ease;
+        box-shadow: 
+            0 20px 60px rgba(0, 0, 0, 0.6),
+            inset 0 0 60px rgba(255, 153, 68, 0.1);
+    }
+    
+    .letter:hover {
+        transform: translateZ(20px);
+    }
+    
+    .letter::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        background: linear-gradient(45deg, 
+            #ff9944, 
+            #ffb366, 
+            #ff9944, 
+            #d4aa7a,
+            #ff9944);
+        background-size: 400%;
+        border-radius: 20px;
+        z-index: -1;
+        animation: borderRotate 8s linear infinite;
+    }
+    
+    @keyframes borderRotate {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 400% 50%; }
+    }
+    
+    .letter-greeting {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 1.4em;
+        color: #ff9944;
+        margin-bottom: 30px;
+        font-weight: 500;
+        animation: textShimmer 3s ease-in-out infinite;
+    }
+    
+    @keyframes textShimmer {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.8; }
+    }
+    
+    .letter p {
+        font-size: 1.2em;
+        line-height: 1.9;
+        margin-bottom: 25px;
+        color: #fffaf0;
+        opacity: 0;
+        animation: fadeInUp 1s ease-out forwards;
+    }
+    
+    .letter p:nth-child(2) { animation-delay: 0.2s; }
+    .letter p:nth-child(3) { animation-delay: 0.4s; }
+    .letter p:nth-child(4) { animation-delay: 0.6s; }
+    .letter p:nth-child(5) { animation-delay: 0.8s; }
+    .letter p:nth-child(6) { animation-delay: 1s; }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .letter-signature {
+        text-align: right;
+        font-size: 1.5em;
+        font-style: italic;
+        color: #d4aa7a;
+        margin-top: 50px;
+    }
+    
+    /* Firebird Divider */
+    .firebird-divider {
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    
+    .firebird-container {
+        font-size: 10em;
+        position: relative;
+        animation: firebirdSoar 8s ease-in-out infinite;
+        filter: drop-shadow(0 0 40px rgba(255, 153, 68, 1));
+    }
+    
+    @keyframes firebirdSoar {
+        0%, 100% {
+            transform: translateY(0) rotate(0deg) scale(1);
+        }
+        25% {
+            transform: translateY(-50px) rotate(-10deg) scale(1.1);
+        }
+        50% {
+            transform: translateY(-80px) rotate(0deg) scale(1.15);
+        }
+        75% {
+            transform: translateY(-50px) rotate(10deg) scale(1.1);
+        }
+    }
+    
+    /* Poem Section */
+    .poem-section {
+        padding: 100px 40px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+    
+    .poem-main-title {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 3.5em;
+        text-align: center;
+        margin-bottom: 120px;
+        color: #ff9944;
+        font-weight: 600;
+        letter-spacing: 6px;
+        position: relative;
+        transform-style: preserve-3d;
+        animation: poemTitleRotate 6s ease-in-out infinite;
+    }
+    
+    @keyframes poemTitleRotate {
+        0%, 100% {
+            transform: perspective(1000px) rotateY(0deg);
+            text-shadow: 
+                0 0 40px rgba(255, 153, 68, 0.8),
+                0 0 80px rgba(255, 153, 68, 0.5);
+        }
+        50% {
+            transform: perspective(1000px) rotateY(10deg);
+            text-shadow: 
+                0 0 60px rgba(255, 153, 68, 1),
+                0 0 120px rgba(255, 153, 68, 0.7);
+        }
+    }
+    
+    .poem-part {
+        margin-bottom: 120px;
+        position: relative;
+        opacity: 0;
+        transform: translateX(-100px);
+        transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .poem-part.visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    .part-title {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 1.8em;
+        color: #d4aa7a;
+        margin-bottom: 50px;
+        font-style: italic;
+        letter-spacing: 5px;
+        position: relative;
+        padding-left: 60px;
+    }
+    
+    .part-title::before {
+        content: '◆';
+        position: absolute;
+        left: 0;
+        font-size: 1.2em;
+        color: #ff9944;
+        animation: sparkleRotate 3s ease-in-out infinite;
+    }
+    
+    @keyframes sparkleRotate {
+        0%, 100% {
+            transform: rotate(0deg) scale(1);
+            opacity: 0.7;
+        }
+        50% {
+            transform: rotate(180deg) scale(1.3);
+            opacity: 1;
+        }
+    }
+    
+    .stanza {
+        margin-bottom: 45px;
+        padding-left: 80px;
+        position: relative;
+    }
+    
+    .stanza::before {
+        content: '';
+        position: absolute;
+        left: 40px;
+        top: 0;
+        height: 100%;
+        width: 3px;
+        background: linear-gradient(
+            to bottom,
+            transparent,
+            rgba(255, 153, 68, 0.5),
+            rgba(255, 153, 68, 0.8),
+            rgba(255, 153, 68, 0.5),
+            transparent
+        );
+        animation: lineGlow 3s ease-in-out infinite;
+    }
+    
+    @keyframes lineGlow {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 1; }
+    }
+    
+    .stanza p {
+        font-size: 1.2em;
+        line-height: 2;
+        margin-bottom: 12px;
+        color: #fffaf0;
+        font-weight: 400;
+    }
+    
+    .stanza p i {
+        color: #ff9944;
+        font-style: italic;
+        font-weight: 500;
+        text-shadow: 0 0 20px rgba(255, 153, 68, 0.5);
+    }
+    
+    /* Hearts */
+    .hearts-section {
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 100px 40px;
+    }
+    
+    .hearts {
+        font-size: 5em;
+        display: flex;
+        gap: 50px;
+    }
+    
+    .hearts span {
+        display: inline-block;
+        color: #ff9944;
+        filter: drop-shadow(0 0 30px rgba(255, 153, 68, 0.8));
+        animation: heartPulse 2s ease-in-out infinite;
+    }
+    
+    .hearts span:nth-child(1) { animation-delay: 0s; }
+    .hearts span:nth-child(2) { animation-delay: 0.4s; }
+    .hearts span:nth-child(3) { animation-delay: 0.8s; }
+    
+    @keyframes heartPulse {
+        0%, 100% {
+            transform: scale(1) rotate(0deg);
+            opacity: 0.7;
+        }
+        50% {
+            transform: scale(1.3) rotate(10deg);
+            opacity: 1;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 3.5em;
+            letter-spacing: 4px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3em;
+        }
+        
+        .letter {
+            padding: 40px;
+        }
+        
+        .firebird-container {
+            font-size: 6em;
+        }
+        
+        .poem-main-title {
+            font-size: 3em;
+        }
+        
+        .stanza {
+            padding-left: 40px;
+        }
+        
+        .stanza::before {
+            left: 20px;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="bg-gradient"></div>
+
+```
+<div class="content-wrapper">
+    <!-- Hero -->
+    <section class="hero">
+        <h1 class="hero-title">
+            <span>f</span><span>o</span><span>r</span>
+            <span>u</span><span>m</span><span>m</span><span>a</span>
+            <span>&</span>
+            <span>a</span><span>p</span><span>p</span><span>a</span>
+        </h1>
+        <div class="hero-subtitle">december 25, 2025</div>
+        <div class="scroll-indicator">↓</div>
+    </section>
+    
+    <!-- Letter -->
+    <section class="letter-section">
+        <div class="letter">
+            <p class="letter-greeting">dear umma and appa,</p>
+            <p>merry christmas!</p>
+            <p>i really appreciate everything you have done for me. writing my college essays have really made me realize just how much of an impact you have had on my life, from the papers you signed to bring me Home on june 18, to the things you advise me and help me every single day, even though i am literally already seventeen.</p>
+            <p>i complain so much, and yet i have never taken enough time to profusely thank you for all that you have done for me. i wish i could express just how much i appreciate you.</p>
+            <p>i wrote you a poem about a firebird.</p>
+            <p class="letter-signature">with all my love,<br>hayden park 💛</p>
+        </div>
+    </section>
+    
+    <!-- Firebird Divider -->
+    <section class="firebird-divider">
+        <div class="firebird-container">🕊️</div>
+    </section>
+    
+    <!-- Poem -->
+    <section class="poem-section">
+        <h2 class="poem-main-title">The Firebird</h2>
+        
+        <div class="poem-part">
+            <div class="part-title">i. the nest</div>
+            <div class="stanza">
+                <p>In a winter long ago, when snow fell quiet and deep,</p>
+                <p>two hands reached into the cold to lift a fragile thing—</p>
+                <p>not born of their own making, not woven from their song,</p>
+                <p>but a small flame flickering in the frost, struggling to belong.</p>
+            </div>
+            <div class="stanza">
+                <p>They built a nest of warmth where none had been before,</p>
+                <p>lined it soft with patience, with hope, with something more—</p>
+                <p>a promise whispered in the dark: <i>you will not face the cold alone.</i></p>
+                <p>And so the firebird learned that chosen love could feel like home.</p>
+            </div>
+        </div>
+        
+        <div class="poem-part">
+            <div class="part-title">ii. the flight</div>
+            <div class="stanza">
+                <p>There were days the firebird stumbled, wings too weak to soar,</p>
+                <p>days it fell and scraped its knees on an unforgiving floor.</p>
+                <p>But always, always, there were hands to catch the fall,</p>
+                <p>voices soft as summer rain: <i>it's okay. we've got you. that's all.</i></p>
+            </div>
+            <div class="stanza">
+                <p>They taught the firebird to rise—not with demands or force,</p>
+                <p>but by showing it the sky, by charting out the course,</p>
+                <p>by believing in the flight before the wings had grown,</p>
+                <p>by standing in the doorway, saying: <i>go. you're never alone.</i></p>
+            </div>
+        </div>
+        
+        <div class="poem-part">
+            <div class="part-title">iii. the return</div>
+            <div class="stanza">
+                <p>Now the firebird understands: the warmest flame it knows</p>
+                <p>was never in its feathers, never in the way it glows—</p>
+                <p>it was in the hands that signed the papers on June eighteen,</p>
+                <p>the hands that never asked for thanks, that loved without being seen.</p>
+            </div>
+            <div class="stanza">
+                <p>The firebird is seventeen now, still learning how to fly,</p>
+                <p>still stumbling, still complaining, still reaching for the sky.</p>
+                <p>But it knows this, burning bright and true as any star:</p>
+                <p>it was not born into this nest, but it is loved for who they are.</p>
+            </div>
+            <div class="stanza">
+                <p>And when the firebird soars at last, when it finds its own way home,</p>
+                <p>it will carry in its wings the warmth of those who said:</p>
+                <p><i>you are ours. you always were. you'll never be alone.</i></p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Hearts -->
+    <section class="hearts-section">
+        <div class="hearts">
+            <span>♡</span>
+            <span>♡</span>
+            <span>♡</span>
+        </div>
+    </section>
+</div>
+
+<script>
+    // Particle system
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+    
+    const particles = [];
+    const particleCount = 100;
+    
+    class Particle {
+        constructor() {
+            this.reset();
+        }
+        
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height + 20;
+            this.size = Math.random() * 3 + 1;
+            this.speedY = Math.random() * 1.5 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.5;
+            this.opacity = Math.random() * 0.5 + 0.3;
+            this.life = 1;
+        }
+        
+        update() {
+            this.y -= this.speedY;
+            this.x += this.speedX;
+            this.life -= 0.003;
+            
+            if (this.y < -20 || this.life <= 0) {
+                this.reset();
+            }
+        }
+        
+        draw() {
+            ctx.save();
+            ctx.globalAlpha = this.opacity * this.life;
+            const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 3);
+            gradient.addColorStop(0, '#ffb366');
+            gradient.addColorStop(0.5, '#ff9944');
+            gradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+    
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+    }
+    
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(particle => {
+            particle.update();
+            particle.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    // Scroll animations for poem parts
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+    
+    document.querySelectorAll('.poem-part').forEach(part => {
+        observer.observe(part);
+    });
+</script>
+```
+
+</body>
+</html>
