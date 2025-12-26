@@ -1,685 +1,563 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>for umma & appa 🕊️</title>
+    <title>Merry Christmas</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&display=swap');
-
-```
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
-    html {
-        scroll-behavior: smooth;
-    }
-    
-    body {
-        font-family: 'Times New Roman', Times, serif;
-        background: #0a0604;
-        color: #fff5e6;
-        overflow-x: hidden;
-        position: relative;
-        perspective: 1000px;
-    }
-    
-    /* Canvas for particles */
-    #particle-canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        pointer-events: none;
-    }
-    
-    /* Animated gradient background */
-    .bg-gradient {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: 
-            radial-gradient(ellipse at 20% 20%, rgba(255, 120, 40, 0.15) 0%, transparent 50%),
-            radial-gradient(ellipse at 80% 80%, rgba(255, 180, 100, 0.12) 0%, transparent 50%),
-            radial-gradient(ellipse at 50% 50%, rgba(212, 100, 60, 0.1) 0%, transparent 70%);
-        animation: bgShift 20s ease-in-out infinite;
-        z-index: 0;
-    }
-    
-    @keyframes bgShift {
-        0%, 100% { 
-            transform: scale(1) rotate(0deg);
-            opacity: 0.6;
+        @import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        50% { 
-            transform: scale(1.2) rotate(5deg);
-            opacity: 1;
+        
+        body {
+            font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #f5f0e8 0%, #e8dfd0 100%);
+            color: #5a2a27;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-    }
-    
-    /* Content wrapper */
-    .content-wrapper {
-        position: relative;
-        z-index: 2;
-    }
-    
-    /* Hero Section */
-    .hero {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        position: relative;
-        padding: 40px 20px;
-    }
-    
-    .hero-title {
-        font-family: 'Cinzel', serif;
-        font-size: 6em;
-        font-weight: 700;
-        color: #ff9944;
-        letter-spacing: 8px;
-        margin-bottom: 30px;
-        position: relative;
-        transform-style: preserve-3d;
-        animation: titleFloat 4s ease-in-out infinite;
-    }
-    
-    @keyframes titleFloat {
-        0%, 100% {
-            transform: translateY(0) rotateX(0deg);
-            text-shadow: 
-                0 0 40px rgba(255, 153, 68, 0.8),
-                0 0 80px rgba(255, 153, 68, 0.5),
-                0 10px 30px rgba(0, 0, 0, 0.5);
+        
+        /* Envelope Stage */
+        .envelope-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: opacity 1s ease;
         }
-        50% {
-            transform: translateY(-20px) rotateX(5deg);
-            text-shadow: 
-                0 0 60px rgba(255, 153, 68, 1),
-                0 0 120px rgba(255, 153, 68, 0.7),
-                0 20px 50px rgba(0, 0, 0, 0.7);
-        }
-    }
-    
-    .hero-title span {
-        display: inline-block;
-        animation: letterFloat 3s ease-in-out infinite;
-    }
-    
-    .hero-title span:nth-child(1) { animation-delay: 0s; }
-    .hero-title span:nth-child(2) { animation-delay: 0.1s; }
-    .hero-title span:nth-child(3) { animation-delay: 0.2s; }
-    .hero-title span:nth-child(4) { animation-delay: 0.3s; }
-    .hero-title span:nth-child(5) { animation-delay: 0.4s; }
-    .hero-title span:nth-child(6) { animation-delay: 0.5s; }
-    
-    @keyframes letterFloat {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-    }
-    
-    .hero-subtitle {
-        font-family: 'Libre Baskerville', serif;
-        font-size: 2em;
-        color: #d4aa7a;
-        font-style: italic;
-        letter-spacing: 4px;
-        animation: subtitleGlow 2s ease-in-out infinite;
-    }
-    
-    @keyframes subtitleGlow {
-        0%, 100% { 
-            opacity: 0.7;
-            text-shadow: 0 0 20px rgba(212, 170, 122, 0.5);
-        }
-        50% { 
-            opacity: 1;
-            text-shadow: 0 0 40px rgba(212, 170, 122, 0.8);
-        }
-    }
-    
-    .scroll-indicator {
-        position: absolute;
-        bottom: 50px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 3em;
-        color: #ff9944;
-        animation: bounce 2s ease-in-out infinite;
-    }
-    
-    @keyframes bounce {
-        0%, 100% { transform: translateX(-50%) translateY(0); }
-        50% { transform: translateX(-50%) translateY(20px); }
-    }
-    
-    /* Letter Section */
-    .letter-section {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 100px 40px;
-        position: relative;
-    }
-    
-    .letter {
-        max-width: 900px;
-        background: rgba(30, 20, 15, 0.8);
-        backdrop-filter: blur(20px);
-        border: 2px solid transparent;
-        border-radius: 20px;
-        padding: 70px;
-        position: relative;
-        transform-style: preserve-3d;
-        transition: transform 0.3s ease;
-        box-shadow: 
-            0 20px 60px rgba(0, 0, 0, 0.6),
-            inset 0 0 60px rgba(255, 153, 68, 0.1);
-    }
-    
-    .letter:hover {
-        transform: translateZ(20px);
-    }
-    
-    .letter::before {
-        content: '';
-        position: absolute;
-        inset: -2px;
-        background: linear-gradient(45deg, 
-            #ff9944, 
-            #ffb366, 
-            #ff9944, 
-            #d4aa7a,
-            #ff9944);
-        background-size: 400%;
-        border-radius: 20px;
-        z-index: -1;
-        animation: borderRotate 8s linear infinite;
-    }
-    
-    @keyframes borderRotate {
-        0% { background-position: 0% 50%; }
-        100% { background-position: 400% 50%; }
-    }
-    
-    .letter-greeting {
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 1.4em;
-        color: #ff9944;
-        margin-bottom: 30px;
-        font-weight: 500;
-        animation: textShimmer 3s ease-in-out infinite;
-    }
-    
-    @keyframes textShimmer {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.8; }
-    }
-    
-    .letter p {
-        font-size: 1.2em;
-        line-height: 1.9;
-        margin-bottom: 25px;
-        color: #fffaf0;
-        opacity: 0;
-        animation: fadeInUp 1s ease-out forwards;
-    }
-    
-    .letter p:nth-child(2) { animation-delay: 0.2s; }
-    .letter p:nth-child(3) { animation-delay: 0.4s; }
-    .letter p:nth-child(4) { animation-delay: 0.6s; }
-    .letter p:nth-child(5) { animation-delay: 0.8s; }
-    .letter p:nth-child(6) { animation-delay: 1s; }
-    
-    @keyframes fadeInUp {
-        from {
+        
+        .envelope-container.hidden {
             opacity: 0;
-            transform: translateY(30px);
+            pointer-events: none;
         }
-        to {
+        
+        .envelope {
+            position: relative;
+            width: 400px;
+            height: 250px;
+        }
+        
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #e8dfd0;
+            border: 2px solid #8b3a3a;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+        
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f5f0e8;
+            border: 2px solid #8b3a3a;
+            clip-path: polygon(0 0, 50% 40%, 100% 0, 100% 100%, 0 100%);
+            transform-origin: top center;
+            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+        }
+        
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+        
+        .wax-seal {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #8b3a3a 0%, #6b2a2a 100%);
+            border-radius: 50%;
+            z-index: 3;
+            box-shadow: 0 2px 8px rgba(139, 58, 58, 0.5);
+            transition: opacity 1s ease;
+        }
+        
+        .envelope.open .wax-seal {
+            opacity: 0;
+        }
+        
+        .wax-seal::before {
+            content: '🕊️';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5em;
+            filter: brightness(0) invert(1) opacity(0.3);
+        }
+        
+        .click-hint {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.1em;
+            color: #8b3a3a;
+            font-style: italic;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        /* Letter Stage */
+        .letter-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1.5s ease;
+            z-index: 10;
+        }
+        
+        .letter-container.active {
             opacity: 1;
+            pointer-events: all;
+        }
+        
+        .letter-paper {
+            max-width: 700px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(139, 58, 58, 0.2);
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            position: relative;
+            transform: translateY(100vh);
+            transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .letter-container.active .letter-paper {
             transform: translateY(0);
         }
-    }
-    
-    .letter-signature {
-        text-align: right;
-        font-size: 1.5em;
-        font-style: italic;
-        color: #d4aa7a;
-        margin-top: 50px;
-    }
-    
-    /* Firebird Divider */
-    .firebird-divider {
-        min-height: 60vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-    }
-    
-    .firebird-container {
-        font-size: 10em;
-        position: relative;
-        animation: firebirdSoar 8s ease-in-out infinite;
-        filter: drop-shadow(0 0 40px rgba(255, 153, 68, 1));
-    }
-    
-    @keyframes firebirdSoar {
-        0%, 100% {
-            transform: translateY(0) rotate(0deg) scale(1);
+        
+        .letter-header {
+            font-family: 'Tangerine', cursive;
+            font-size: 4em;
+            color: #8b3a3a;
+            text-align: center;
+            margin-bottom: 40px;
         }
-        25% {
-            transform: translateY(-50px) rotate(-10deg) scale(1.1);
+        
+        .letter-greeting {
+            font-size: 1.2em;
+            color: #8b3a3a;
+            margin-bottom: 30px;
+            font-style: italic;
         }
-        50% {
-            transform: translateY(-80px) rotate(0deg) scale(1.15);
+        
+        .letter-body {
+            font-size: 1.1em;
+            line-height: 1.9;
+            color: #5a2a27;
         }
-        75% {
-            transform: translateY(-50px) rotate(10deg) scale(1.1);
+        
+        .letter-body p {
+            margin-bottom: 20px;
         }
-    }
-    
-    /* Poem Section */
-    .poem-section {
-        padding: 100px 40px;
-        max-width: 1100px;
-        margin: 0 auto;
-    }
-    
-    .poem-main-title {
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 3.5em;
-        text-align: center;
-        margin-bottom: 120px;
-        color: #ff9944;
-        font-weight: 600;
-        letter-spacing: 6px;
-        position: relative;
-        transform-style: preserve-3d;
-        animation: poemTitleRotate 6s ease-in-out infinite;
-    }
-    
-    @keyframes poemTitleRotate {
-        0%, 100% {
-            transform: perspective(1000px) rotateY(0deg);
-            text-shadow: 
-                0 0 40px rgba(255, 153, 68, 0.8),
-                0 0 80px rgba(255, 153, 68, 0.5);
+        
+        .letter-signature {
+            text-align: right;
+            font-style: italic;
+            margin-top: 40px;
+            color: #8b3a3a;
+            font-size: 1.15em;
         }
-        50% {
-            transform: perspective(1000px) rotateY(10deg);
-            text-shadow: 
-                0 0 60px rgba(255, 153, 68, 1),
-                0 0 120px rgba(255, 153, 68, 0.7);
+        
+        .continue-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1em;
+            color: #8b3a3a;
+            font-style: italic;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            cursor: pointer;
         }
-    }
-    
-    .poem-part {
-        margin-bottom: 120px;
-        position: relative;
-        opacity: 0;
-        transform: translateX(-100px);
-        transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .poem-part.visible {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    
-    .part-title {
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 1.8em;
-        color: #d4aa7a;
-        margin-bottom: 50px;
-        font-style: italic;
-        letter-spacing: 5px;
-        position: relative;
-        padding-left: 60px;
-    }
-    
-    .part-title::before {
-        content: '◆';
-        position: absolute;
-        left: 0;
-        font-size: 1.2em;
-        color: #ff9944;
-        animation: sparkleRotate 3s ease-in-out infinite;
-    }
-    
-    @keyframes sparkleRotate {
-        0%, 100% {
-            transform: rotate(0deg) scale(1);
+        
+        .continue-hint.visible {
             opacity: 0.7;
+            animation: pulse 2s ease-in-out infinite;
         }
-        50% {
-            transform: rotate(180deg) scale(1.3);
+        
+        .continue-hint:hover {
             opacity: 1;
         }
-    }
-    
-    .stanza {
-        margin-bottom: 45px;
-        padding-left: 80px;
-        position: relative;
-    }
-    
-    .stanza::before {
-        content: '';
-        position: absolute;
-        left: 40px;
-        top: 0;
-        height: 100%;
-        width: 3px;
-        background: linear-gradient(
-            to bottom,
-            transparent,
-            rgba(255, 153, 68, 0.5),
-            rgba(255, 153, 68, 0.8),
-            rgba(255, 153, 68, 0.5),
-            transparent
-        );
-        animation: lineGlow 3s ease-in-out infinite;
-    }
-    
-    @keyframes lineGlow {
-        0%, 100% { opacity: 0.5; }
-        50% { opacity: 1; }
-    }
-    
-    .stanza p {
-        font-size: 1.2em;
-        line-height: 2;
-        margin-bottom: 12px;
-        color: #fffaf0;
-        font-weight: 400;
-    }
-    
-    .stanza p i {
-        color: #ff9944;
-        font-style: italic;
-        font-weight: 500;
-        text-shadow: 0 0 20px rgba(255, 153, 68, 0.5);
-    }
-    
-    /* Hearts */
-    .hearts-section {
-        min-height: 50vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 100px 40px;
-    }
-    
-    .hearts {
-        font-size: 5em;
-        display: flex;
-        gap: 50px;
-    }
-    
-    .hearts span {
-        display: inline-block;
-        color: #ff9944;
-        filter: drop-shadow(0 0 30px rgba(255, 153, 68, 0.8));
-        animation: heartPulse 2s ease-in-out infinite;
-    }
-    
-    .hearts span:nth-child(1) { animation-delay: 0s; }
-    .hearts span:nth-child(2) { animation-delay: 0.4s; }
-    .hearts span:nth-child(3) { animation-delay: 0.8s; }
-    
-    @keyframes heartPulse {
-        0%, 100% {
-            transform: scale(1) rotate(0deg);
-            opacity: 0.7;
+        
+        /* Poem Stage */
+        .poem-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1.5s ease;
+            padding: 80px 40px;
         }
-        50% {
-            transform: scale(1.3) rotate(10deg);
+        
+        .poem-container.active {
             opacity: 1;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .hero-title {
-            font-size: 3.5em;
-            letter-spacing: 4px;
+            pointer-events: all;
         }
         
-        .hero-subtitle {
-            font-size: 1.3em;
+        .poem-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        .letter {
-            padding: 40px;
+        .poem-title {
+            font-family: 'Tangerine', cursive;
+            font-size: 5em;
+            text-align: center;
+            color: #8b3a3a;
+            margin-bottom: 80px;
+            font-weight: 700;
         }
         
-        .firebird-container {
-            font-size: 6em;
+        .poem-part {
+            margin-bottom: 70px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
         }
         
-        .poem-main-title {
-            font-size: 3em;
+        .poem-part:nth-child(2) { animation-delay: 0.3s; }
+        .poem-part:nth-child(3) { animation-delay: 0.6s; }
+        .poem-part:nth-child(4) { animation-delay: 0.9s; }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .part-number {
+            font-size: 1em;
+            color: #8b3a3a;
+            margin-bottom: 30px;
+            text-align: center;
+            font-style: italic;
+            letter-spacing: 3px;
         }
         
         .stanza {
+            margin-bottom: 30px;
             padding-left: 40px;
+            border-left: 2px solid rgba(139, 58, 58, 0.2);
         }
         
-        .stanza::before {
-            left: 20px;
+        .stanza p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 8px;
+            color: #5a2a27;
         }
-    }
-</style>
-```
-
+        
+        .stanza em {
+            font-style: italic;
+            color: #8b3a3a;
+        }
+        
+        .poem-footer {
+            text-align: center;
+            margin-top: 100px;
+            padding: 40px 0;
+        }
+        
+        .footer-line {
+            width: 200px;
+            height: 1px;
+            background: rgba(139, 58, 58, 0.3);
+            margin: 30px auto;
+        }
+        
+        .footer-to {
+            font-size: 1em;
+            color: #8b3a3a;
+            margin-bottom: 15px;
+        }
+        
+        .footer-to span {
+            font-style: italic;
+            font-weight: 500;
+        }
+        
+        .footer-from {
+            font-family: 'Tangerine', cursive;
+            font-size: 2.5em;
+            color: #8b3a3a;
+            font-weight: 700;
+        }
+        
+        @media (max-width: 768px) {
+            .envelope {
+                width: 300px;
+                height: 190px;
+            }
+            
+            .letter-paper {
+                padding: 40px;
+            }
+            
+            .poem-title {
+                font-size: 3.5em;
+            }
+            
+            .stanza {
+                padding-left: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <canvas id="particle-canvas"></canvas>
-    <div class="bg-gradient"></div>
-
-```
-<div class="content-wrapper">
-    <!-- Hero -->
-    <section class="hero">
-        <h1 class="hero-title">
-            <span>f</span><span>o</span><span>r</span>
-            <span>u</span><span>m</span><span>m</span><span>a</span>
-            <span>&</span>
-            <span>a</span><span>p</span><span>p</span><span>a</span>
-        </h1>
-        <div class="hero-subtitle">december 25, 2025</div>
-        <div class="scroll-indicator">↓</div>
-    </section>
-    
-    <!-- Letter -->
-    <section class="letter-section">
-        <div class="letter">
-            <p class="letter-greeting">dear umma and appa,</p>
-            <p>merry christmas!</p>
-            <p>i really appreciate everything you have done for me. writing my college essays have really made me realize just how much of an impact you have had on my life, from the papers you signed to bring me Home on june 18, to the things you advise me and help me every single day, even though i am literally already seventeen.</p>
-            <p>i complain so much, and yet i have never taken enough time to profusely thank you for all that you have done for me. i wish i could express just how much i appreciate you.</p>
-            <p>i wrote you a poem about a firebird.</p>
-            <p class="letter-signature">with all my love,<br>hayden park 💛</p>
+    <!-- Envelope Stage -->
+    <div class="envelope-container" id="envelopeContainer">
+        <div class="envelope" id="envelope">
+            <div class="envelope-back"></div>
+            <div class="envelope-flap"></div>
+            <div class="wax-seal"></div>
         </div>
-    </section>
+        <div class="click-hint">click to open</div>
+    </div>
     
-    <!-- Firebird Divider -->
-    <section class="firebird-divider">
-        <div class="firebird-container">🕊️</div>
-    </section>
-    
-    <!-- Poem -->
-    <section class="poem-section">
-        <h2 class="poem-main-title">The Firebird</h2>
-        
-        <div class="poem-part">
-            <div class="part-title">i. the nest</div>
-            <div class="stanza">
-                <p>In a winter long ago, when snow fell quiet and deep,</p>
-                <p>two hands reached into the cold to lift a fragile thing—</p>
-                <p>not born of their own making, not woven from their song,</p>
-                <p>but a small flame flickering in the frost, struggling to belong.</p>
+    <!-- Letter Stage -->
+    <div class="letter-container" id="letterContainer">
+        <div class="letter-paper">
+            <div class="letter-header">Merry Christmas!</div>
+            <div class="letter-content">
+                <p class="letter-greeting" id="greeting"></p>
+                <div class="letter-body" id="letterBody"></div>
+                <p class="letter-signature" id="signature"></p>
             </div>
-            <div class="stanza">
-                <p>They built a nest of warmth where none had been before,</p>
-                <p>lined it soft with patience, with hope, with something more—</p>
-                <p>a promise whispered in the dark: <i>you will not face the cold alone.</i></p>
-                <p>And so the firebird learned that chosen love could feel like home.</p>
-            </div>
+            <div class="continue-hint" id="continueHint">click to continue →</div>
         </div>
-        
-        <div class="poem-part">
-            <div class="part-title">ii. the flight</div>
-            <div class="stanza">
-                <p>There were days the firebird stumbled, wings too weak to soar,</p>
-                <p>days it fell and scraped its knees on an unforgiving floor.</p>
-                <p>But always, always, there were hands to catch the fall,</p>
-                <p>voices soft as summer rain: <i>it's okay. we've got you. that's all.</i></p>
-            </div>
-            <div class="stanza">
-                <p>They taught the firebird to rise—not with demands or force,</p>
-                <p>but by showing it the sky, by charting out the course,</p>
-                <p>by believing in the flight before the wings had grown,</p>
-                <p>by standing in the doorway, saying: <i>go. you're never alone.</i></p>
-            </div>
-        </div>
-        
-        <div class="poem-part">
-            <div class="part-title">iii. the return</div>
-            <div class="stanza">
-                <p>Now the firebird understands: the warmest flame it knows</p>
-                <p>was never in its feathers, never in the way it glows—</p>
-                <p>it was in the hands that signed the papers on June eighteen,</p>
-                <p>the hands that never asked for thanks, that loved without being seen.</p>
-            </div>
-            <div class="stanza">
-                <p>The firebird is seventeen now, still learning how to fly,</p>
-                <p>still stumbling, still complaining, still reaching for the sky.</p>
-                <p>But it knows this, burning bright and true as any star:</p>
-                <p>it was not born into this nest, but it is loved for who they are.</p>
-            </div>
-            <div class="stanza">
-                <p>And when the firebird soars at last, when it finds its own way home,</p>
-                <p>it will carry in its wings the warmth of those who said:</p>
-                <p><i>you are ours. you always were. you'll never be alone.</i></p>
-            </div>
-        </div>
-    </section>
+    </div>
     
-    <!-- Hearts -->
-    <section class="hearts-section">
-        <div class="hearts">
-            <span>♡</span>
-            <span>♡</span>
-            <span>♡</span>
-        </div>
-    </section>
-</div>
-
-<script>
-    // Particle system
-    const canvas = document.getElementById('particle-canvas');
-    const ctx = canvas.getContext('2d');
-    
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
-    
-    const particles = [];
-    const particleCount = 100;
-    
-    class Particle {
-        constructor() {
-            this.reset();
-        }
-        
-        reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = canvas.height + 20;
-            this.size = Math.random() * 3 + 1;
-            this.speedY = Math.random() * 1.5 + 0.5;
-            this.speedX = (Math.random() - 0.5) * 0.5;
-            this.opacity = Math.random() * 0.5 + 0.3;
-            this.life = 1;
-        }
-        
-        update() {
-            this.y -= this.speedY;
-            this.x += this.speedX;
-            this.life -= 0.003;
+    <!-- Poem Stage -->
+    <div class="poem-container" id="poemContainer">
+        <div class="poem-wrapper">
+            <h2 class="poem-title">The Firebird</h2>
             
-            if (this.y < -20 || this.life <= 0) {
-                this.reset();
+            <div class="poem-part">
+                <div class="part-number">I</div>
+                <div class="stanza">
+                    <p>There is a kind of winter that lives in the body—not the one that melts</p>
+                    <p>with spring, but the one born in a child left alone, the frost that settles</p>
+                    <p>in small hands waiting for someone to notice. You signed papers in June,</p>
+                    <p>and I wonder if you knew what that meant—not just a name,</p>
+                    <p>not just a date, but the slow work of thawing, the careful insistence</p>
+                    <p>that warmth could be rebuilt in a body that had learned to expect cold.</p>
+                </div>
+                <div class="stanza">
+                    <p>The firebird does not remember being lifted from the snow,</p>
+                    <p>only that one day the cold was gone, replaced by something warmer</p>
+                    <p>than feathers, something steadier than heat—the kind of warmth</p>
+                    <p>that comes from being chosen, from hands that reach</p>
+                    <p>not because they have to, but because they want to,</p>
+                    <p>because love, it turns out, is a decision made over and over again.</p>
+                </div>
+            </div>
+            
+            <div class="poem-part">
+                <div class="part-number">II</div>
+                <div class="stanza">
+                    <p>Some mornings I forget that I was not always yours, that there was a time</p>
+                    <p>before you said my name as if it had always belonged to you,</p>
+                    <p>as if seventeen years is nothing when weighed against the word <em>daughter</em>,</p>
+                    <p>as if biology could ever matter more than the daily choosing,</p>
+                    <p>the way you show up in the small things—reminding me to wear a coat,</p>
+                    <p>asking if I've eaten, teaching me that love is not the grand gesture</p>
+                    <p>but the mundane machinery of care, the way it shows up every single day</p>
+                    <p>without asking to be noticed, without needing applause.</p>
+                </div>
+                <div class="stanza">
+                    <p>I complain about small things. You listen anyway.</p>
+                    <p>This is what I'm learning: that patience is a kind of faith,</p>
+                    <p>that the firebird learned to fly not because it was born with wings</p>
+                    <p>but because someone stood beneath it and believed in falling</p>
+                    <p>as the first part of flight, believed that even broken things</p>
+                    <p>can be taught to rise if they are loved enough, if they are given</p>
+                    <p>the space to stumble without fear of being left behind.</p>
+                </div>
+            </div>
+            
+            <div class="poem-part">
+                <div class="part-number">III</div>
+                <div class="stanza">
+                    <p>What do I owe you? Not gratitude—though I feel it, sharp and constant</p>
+                    <p>as a stone in my chest—not repayment, not perfection, not the flawless child</p>
+                    <p>you never asked for. You never asked for anything except that I try,</p>
+                    <p>that I show up, that I let myself be held without needing to earn it.</p>
+                    <p>And this is the hardest lesson: learning what it means to be loved</p>
+                    <p>not for what I do but simply because I am, learning to accept</p>
+                    <p>that some debts can never be repaid because they were never meant to be,</p>
+                    <p>because the gift was given freely, without expectation of return.</p>
+                </div>
+                <div class="stanza">
+                    <p>The firebird carries two kinds of warmth now—the one in its wings,</p>
+                    <p>the one it was born with, wild and uncertain, and the one you gave it:</p>
+                    <p>steadier, quieter, the kind that doesn't burn out, the kind that says</p>
+                    <p><em>you are loved</em> even on the days when I forget how to love myself.</p>
+                    <p>When I leave—and I will leave, because that is what you taught me,</p>
+                    <p>to go, to reach, to trust the sky even when it terrifies me—</p>
+                    <p>I will take that warmth with me, carry it like a coal in my chest,</p>
+                    <p>a small fire that never goes out no matter how far I fly.</p>
+                </div>
+                <div class="stanza">
+                    <p>And when I come back—because I will come back,</p>
+                    <p>because you taught me that too, that leaving and returning</p>
+                    <p>are not opposites but two parts of the same love—</p>
+                    <p>I will know what I know now: that home was never a place,</p>
+                    <p>never a house or a city or even a country, but always this:</p>
+                    <p>the sound of your voice saying my name, the way you look at me</p>
+                    <p>as if I am exactly who I am supposed to be. Home was always you.</p>
+                </div>
+            </div>
+            
+            <div class="poem-footer">
+                <div class="footer-line"></div>
+                <p class="footer-to">To: <span>umma & appa</span></p>
+                <p class="footer-from">hayden park</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const envelope = document.getElementById('envelope');
+        const envelopeContainer = document.getElementById('envelopeContainer');
+        const letterContainer = document.getElementById('letterContainer');
+        const poemContainer = document.getElementById('poemContainer');
+        const continueHint = document.getElementById('continueHint');
+        
+        const greeting = "dear umma and appa,";
+        const letterText = [
+            "merry christmas!",
+            "i really appreciate everything you have done for me. writing my college essays have really made me realize just how much of an impact you have had on my life, from the papers you signed to bring me Home on june 18, to the things you advise me and help me every single day, even though i am literally already seventeen.",
+            "i complain so much, and yet i have never taken enough time to profusely thank you for all that you have done for me. i wish i could express just how much i appreciate you.",
+            "when i grow up, i will buy you guys physical gifts and spend lots more time with us as a family!"
+            "i wrote you a poem about a firebird."
+        ];
+        const signature = "with all my love,\nhayden park 💛";
+        
+        let typingComplete = false;
+        
+        // Open envelope on click
+        envelope.addEventListener('click', function() {
+            envelope.classList.add('open');
+            
+            setTimeout(() => {
+                envelopeContainer.classList.add('hidden');
+                letterContainer.classList.add('active');
+                
+                setTimeout(() => {
+                    typeText();
+                }, 1000);
+            }, 1500);
+        });
+        
+        // Typewriter effect
+        function typeText() {
+            const greetingEl = document.getElementById('greeting');
+            const bodyEl = document.getElementById('letterBody');
+            const signatureEl = document.getElementById('signature');
+            
+            let i = 0;
+            const speed = 30;
+            
+            function typeGreeting() {
+                if (i < greeting.length) {
+                    greetingEl.textContent += greeting.charAt(i);
+                    i++;
+                    setTimeout(typeGreeting, speed);
+                } else {
+                    i = 0;
+                    typeBody(0);
+                }
             }
+            
+            function typeBody(paragraphIndex) {
+                if (paragraphIndex < letterText.length) {
+                    const p = document.createElement('p');
+                    bodyEl.appendChild(p);
+                    
+                    let charIndex = 0;
+                    function typeParagraph() {
+                        if (charIndex < letterText[paragraphIndex].length) {
+                            p.textContent += letterText[paragraphIndex].charAt(charIndex);
+                            charIndex++;
+                            setTimeout(typeParagraph, speed);
+                        } else {
+                            setTimeout(() => typeBody(paragraphIndex + 1), 200);
+                        }
+                    }
+                    typeParagraph();
+                } else {
+                    typeSignature();
+                }
+            }
+            
+            function typeSignature() {
+                let i = 0;
+                function typeChar() {
+                    if (i < signature.length) {
+                        if (signature.charAt(i) === '\n') {
+                            signatureEl.innerHTML += '<br>';
+                        } else {
+                            signatureEl.textContent += signature.charAt(i);
+                        }
+                        i++;
+                        setTimeout(typeChar, speed);
+                    } else {
+                        typingComplete = true;
+                        continueHint.classList.add('visible');
+                    }
+                }
+                typeChar();
+            }
+            
+            typeGreeting();
         }
         
-        draw() {
-            ctx.save();
-            ctx.globalAlpha = this.opacity * this.life;
-            const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 3);
-            gradient.addColorStop(0, '#ffb366');
-            gradient.addColorStop(0.5, '#ff9944');
-            gradient.addColorStop(1, 'transparent');
-            ctx.fillStyle = gradient;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.restore();
-        }
-    }
-    
-    for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-    }
-    
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(particle => {
-            particle.update();
-            particle.draw();
-        });
-        requestAnimationFrame(animate);
-    }
-    
-    animate();
-    
-    // Scroll animations for poem parts
-    const observerOptions = {
-        threshold: 0.2,
-        rootMargin: '0px 0px -100px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+        // Continue to poem
+        letterContainer.addEventListener('click', function() {
+            if (typingComplete) {
+                letterContainer.classList.remove('active');
+                setTimeout(() => {
+                    poemContainer.classList.add('active');
+                }, 500);
             }
         });
-    }, observerOptions);
-    
-    document.querySelectorAll('.poem-part').forEach(part => {
-        observer.observe(part);
-    });
-</script>
-```
-
+    </script>
 </body>
 </html>
